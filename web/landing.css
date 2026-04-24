@@ -111,17 +111,12 @@ ul { list-style: none; }
 .di-btn-sm { padding: 10px 18px; font-size: 14px; }
 .di-btn-primary {
   background: var(--di-grad);
-  color: #fff; position: relative; overflow: hidden;
-  isolation: isolate;
+  color: #fff;
+  border: none;
   box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
 }
-.di-btn-primary::before {
-  content: ''; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(135deg, var(--di-cyan), var(--di-violet));
-  opacity: 0; transition: opacity 0.3s ease;
-}
-.di-btn-primary:hover::before { opacity: 1; }
 .di-btn-primary:hover {
+  filter: brightness(1.12);
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(124, 58, 237, 0.45);
 }
