@@ -121,35 +121,37 @@ function Nav() {
   }, [menuOpen]);
   const closeMenu = () => setMenuOpen(false);
   return (
-    <header className={`di-nav ${scrolled ? "scrolled" : ""}`}>
-      <div className="di-nav-inner">
-        <a href="#top" className="di-logo-link" onClick={closeMenu}>
-          <DILogoMark size={36} animated />
-          <span className="di-logo-text">
-            DI <span className="di-logo-accent">Digital Studio</span>
-          </span>
-        </a>
-        <nav className="di-nav-links">
-          <a href="#servicios">Servicios</a>
-          <a href="#proceso">Proceso</a>
-          <a href="#stack">Stack</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contacto">Contacto</a>
-        </nav>
-        <a href="#contacto" className="di-btn di-btn-primary di-btn-sm di-nav-cta">
-          Trabajemos juntos
-        </a>
-        <button
-          className={`di-burger ${menuOpen ? "is-open" : ""}`}
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={menuOpen}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+    <React.Fragment>
+      <header className={`di-nav ${scrolled ? "scrolled" : ""}`}>
+        <div className="di-nav-inner">
+          <a href="#top" className="di-logo-link" onClick={closeMenu}>
+            <DILogoMark size={36} animated />
+            <span className="di-logo-text">
+              DI <span className="di-logo-accent">Digital Studio</span>
+            </span>
+          </a>
+          <nav className="di-nav-links">
+            <a href="#servicios">Servicios</a>
+            <a href="#proceso">Proceso</a>
+            <a href="#stack">Stack</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+          <a href="#contacto" className="di-btn di-btn-primary di-btn-sm di-nav-cta">
+            Trabajemos juntos
+          </a>
+          <button
+            className={`di-burger ${menuOpen ? "is-open" : ""}`}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={menuOpen}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </header>
       <div className={`di-mobile-menu ${menuOpen ? "is-open" : ""}`}>
         <nav className="di-mobile-links">
           <a href="#servicios" onClick={closeMenu}>Servicios</a>
@@ -162,7 +164,7 @@ function Nav() {
           Trabajemos juntos
         </a>
       </div>
-    </header>
+    </React.Fragment>
   );
 }
 
