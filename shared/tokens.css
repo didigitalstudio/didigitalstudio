@@ -14,8 +14,8 @@
 
   /* Text */
   --di-text: #f5f5f7;
-  --di-text-dim: #a1a1aa;
-  --di-text-muted: #71717a;
+  --di-text-dim: #b3b3bd;       /* AAA sobre #07070b */
+  --di-text-muted: #8c8c98;     /* AA pasa cómodo para 13–16 px */
 
   /* Brand (violet → cyan; pink sólo como acento puntual) */
   --di-violet: #7c3aed;

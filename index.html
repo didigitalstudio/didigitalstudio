@@ -1,30 +1,568 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DI Digital Studio — Software a medida, SaaS, webapps, automatizaciones e integraciones con IA." />
-  <title>DI Digital Studio — Software que impulsa tu negocio</title>
-  <link rel="icon" type="image/svg+xml" href="brand/di-logo.svg" />
-  <link rel="alternate icon" href="assets/di-logo-minimal.png" />
-  <link rel="apple-touch-icon" href="assets/di-logo-minimal.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#07070b" />
+  <meta name="color-scheme" content="dark" />
+
+  <title>DI Digital Studio — Software a medida y SaaS para pymes en Argentina</title>
+  <meta name="description" content="Estudio de software en Buenos Aires. Construimos SaaS, webapps, automatizaciones e integraciones con IA para pymes y empresas medianas en Argentina y LATAM. MVP funcional en 4–8 semanas." />
+  <meta name="author" content="DI Digital Studio" />
+  <link rel="canonical" href="https://www.didigitalstudio.com/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="DI Digital Studio" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:url" content="https://www.didigitalstudio.com/" />
+  <meta property="og:title" content="DI Digital Studio — Software a medida y SaaS para pymes en Argentina" />
+  <meta property="og:description" content="Estudio de software en Buenos Aires. Construimos SaaS, webapps, automatizaciones e integraciones con IA para pymes y empresas medianas en Argentina y LATAM." />
+  <meta property="og:image" content="https://www.didigitalstudio.com/assets/og-cover.jpg" />
+  <meta property="og:image:secure_url" content="https://www.didigitalstudio.com/assets/og-cover.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="DI Digital Studio — Software a medida para tu negocio" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DI Digital Studio — Software a medida y SaaS" />
+  <meta name="twitter:description" content="Estudio de software en Buenos Aires. SaaS, webapps, automatizaciones e integraciones con IA para pymes argentinas y LATAM." />
+  <meta name="twitter:image" content="https://www.didigitalstudio.com/assets/og-cover.jpg" />
+  <meta name="twitter:image:alt" content="DI Digital Studio — Software a medida para tu negocio" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/brand/di-logo.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <link rel="mask-icon" href="/brand/di-logo.svg" color="#7c3aed" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="shared/tokens.css" />
-  <link rel="stylesheet" href="web/landing.css" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/shared/tokens.css" />
+  <link rel="stylesheet" href="/web/landing.css" />
+
+  <!-- JSON-LD: Organization + WebSite + FAQPage + ProfessionalService -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.didigitalstudio.com/#org",
+        "name": "DI Digital Studio",
+        "alternateName": "DI Digital",
+        "url": "https://www.didigitalstudio.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.didigitalstudio.com/brand/di-logo.svg",
+          "width": 200,
+          "height": 200
+        },
+        "image": "https://www.didigitalstudio.com/assets/og-cover.jpg",
+        "description": "Estudio de desarrollo de software a medida, SaaS, webapps, automatizaciones e integraciones con IA, basado en Buenos Aires, Argentina.",
+        "email": "info@didigitalstudio.com",
+        "telephone": ["+5493584248863", "+5491169459990"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Buenos Aires",
+          "addressRegion": "CABA",
+          "addressCountry": "AR"
+        },
+        "areaServed": [
+          { "@type": "Country", "name": "Argentina" },
+          { "@type": "Place", "name": "LATAM" }
+        ],
+        "sameAs": ["https://instagram.com/di.digital.studio"],
+        "knowsAbout": [
+          "Software a medida",
+          "SaaS",
+          "Webapps",
+          "Automatizaciones",
+          "Integraciones con IA",
+          "Consultoría técnica",
+          "React",
+          "Next.js",
+          "Node.js",
+          "PostgreSQL",
+          "Supabase",
+          "OpenAI",
+          "Claude"
+        ],
+        "slogan": "Software que impulsa negocios"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.didigitalstudio.com/#website",
+        "url": "https://www.didigitalstudio.com/",
+        "name": "DI Digital Studio",
+        "inLanguage": "es-AR",
+        "publisher": { "@id": "https://www.didigitalstudio.com/#org" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://www.didigitalstudio.com/#service",
+        "name": "DI Digital Studio",
+        "url": "https://www.didigitalstudio.com/",
+        "image": "https://www.didigitalstudio.com/assets/og-cover.jpg",
+        "priceRange": "USD 2.500 — USD 50.000+",
+        "provider": { "@id": "https://www.didigitalstudio.com/#org" },
+        "areaServed": [
+          { "@type": "Country", "name": "Argentina" },
+          { "@type": "Place", "name": "LATAM" }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Buenos Aires",
+          "addressCountry": "AR"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Software a medida", "description": "Backend + frontend, arquitectura escalable, tests y CI/CD. Sin templates, sin features que no usás. Código propio, documentado y tuyo." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SaaS", "description": "Producto listo para facturar: multi-tenant, suscripciones (Stripe / MercadoPago), onboarding y métricas. Del MVP al release en semanas." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Webapps", "description": "Aplicaciones web React / Next.js modernas, real-time, mobile-first. Paneles internos, portales de cliente, dashboards operativos." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatizaciones", "description": "n8n / Zapier custom, scrapers, bots y webhooks. Cortamos tareas repetitivas conectando los sistemas que ya usás." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Integraciones IA", "description": "Agentes, copilots y flujos con LLMs aplicados al negocio. RAG sobre tus datos. No demos — features reales en producción." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consultoría técnica", "description": "Auditoría técnica, roadmap, mentoría a equipos. Sparring técnico para equipos que necesitan una segunda opinión honesta." } }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.didigitalstudio.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tarda un proyecto típico?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Un MVP funcional entre 4 y 8 semanas. Una landing o automatización, entre 1 y 3 semanas. Damos un timeline realista desde el primer call — sin promesas vacías."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Trabajan con pymes o solo con startups?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ambos. Gran parte del trabajo es con pymes y empresas medianas que necesitan digitalizar procesos, integrar sistemas o sumar IA a lo que ya tienen."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿El código queda nuestro?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, siempre. Repositorio, documentación y credenciales son del cliente desde el día uno. Nada de vendor lock-in."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo cobran?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del proyecto: precio cerrado por alcance definido, o retainer mensual para trabajo continuo. Sin letra chica, todo firmado antes de empezar."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Hacen soporte después del lanzamiento?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Ofrecemos planes de mantenimiento y mejora continua. También capacitamos al equipo del cliente para que tome las riendas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Trabajan 100% remoto?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Estamos en Buenos Aires y trabajamos con clientes en toda Argentina y LATAM. Para proyectos grandes podemos visitar las oficinas del cliente."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <div id="root"></div>
+  <a class="di-skip-link" href="#main">Saltar al contenido</a>
+  <div id="root">
+      <!-- PRERENDER:START -->
+<div class="di-prerender">
+        <header class="di-nav-static">
+          <a href="#top" class="di-logo-link">
+            <span class="di-logo-text">DI <span class="di-logo-accent">Digital Studio</span></span>
+          </a>
+          <nav class="di-nav-links" aria-label="Principal">
+            <a href="#servicios">Servicios</a>
+            <a href="#proceso">Proceso</a>
+            <a href="#stack">Stack</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+        </header>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+        <main id="main" tabindex="-1">
+          <section class="di-hero" id="top">
+            <div class="di-container di-hero-inner">
+              <div class="di-badge">
+                <span class="di-dot"></span>
+                <span>Abierto para nuevos proyectos · 2026</span>
+              </div>
+              <h1>Entendemos tu negocio <span class="di-gradient-text">desde adentro</span>.<br/>Y construimos el software que necesita.</h1>
+              <p class="di-hero-sub">Somos un estudio de desarrollo enfocado en pymes y empresas medianas. Diseñamos software a medida, SaaS, automatizaciones e integraciones con IA — del prototipo a producción.</p>
+              <div class="di-hero-ctas">
+                <a href="#contacto" class="di-btn di-btn-primary">Empezar un proyecto →</a>
+                <a href="#servicios" class="di-btn di-btn-ghost">Ver servicios</a>
+              </div>
+            </div>
+          </section>
 
-  <script type="text/babel" src="shared/logo.jsx"></script>
-  <script type="text/babel" src="web/landing.jsx"></script>
-  <script type="text/babel">
-    ReactDOM.createRoot(document.getElementById('root')).render(<LandingApp />);
-  </script>
+          <section id="servicios" class="di-section">
+            <div class="di-container">
+              <div class="di-section-head">
+                <span class="di-eyebrow">// Servicios</span>
+                <h2>Todo lo que tu producto necesita, bajo un mismo estudio.</h2>
+                <p class="di-section-sub">Seis servicios que cubren el ciclo completo: del descubrimiento a la operación. Integrados — no islas.</p>
+              </div>
+              <div class="di-services-grid">
+        <article class="di-service-card">
+          <div class="di-service-head">
+            <span class="di-service-tag">01</span>
+            <h3>Software a medida</h3>
+          </div>
+          <p class="di-service-desc">Construimos el sistema que tu operación necesita. Sin templates, sin features que no usás. Código propio, documentado y tuyo.</p>
+          <ul class="di-service-bullets">
+            <li><span class="di-bullet-dot"></span>Backend + frontend</li><li><span class="di-bullet-dot"></span>Arquitectura escalable</li><li><span class="di-bullet-dot"></span>Tests y CI/CD</li>
+          </ul>
+        </article>
+        <article class="di-service-card">
+          <div class="di-service-head">
+            <span class="di-service-tag">02</span>
+            <h3>SaaS</h3>
+          </div>
+          <p class="di-service-desc">Tu producto listo para facturar: multi-tenant, suscripciones, onboarding y métricas. Del MVP al release en semanas.</p>
+          <ul class="di-service-bullets">
+            <li><span class="di-bullet-dot"></span>Stripe / MercadoPago</li><li><span class="di-bullet-dot"></span>Multi-tenant</li><li><span class="di-bullet-dot"></span>Analytics incluido</li>
+          </ul>
+        </article>
+        <article class="di-service-card">
+          <div class="di-service-head">
+            <span class="di-service-tag">03</span>
+            <h3>Webapps</h3>
+          </div>
+          <p class="di-service-desc">Aplicaciones web modernas, rápidas y responsive. Paneles internos, portales de cliente, dashboards operativos.</p>
+          <ul class="di-service-bullets">
+            <li><span class="di-bullet-dot"></span>React / Next.js</li><li><span class="di-bullet-dot"></span>Real-time</li><li><span class="di-bullet-dot"></span>Mobile-first</li>
+          </ul>
+        </article>
+        <article class="di-service-card">
+          <div class="di-service-head">
+            <span class="di-service-tag">04</span>
+            <h3>Automatizaciones</h3>
+          </div>
+          <p class="di-service-desc">Cortamos tareas repetitivas de raíz. Conectamos tus sistemas, scrapeamos datos, disparamos alertas y generamos reportes solos.</p>
+          <ul class="di-service-bullets">
+            <li><span class="di-bullet-dot"></span>n8n / Zapier custom</li><li><span class="di-bullet-dot"></span>Scrapers</li><li><span class="di-bullet-dot"></span>Bots y webhooks</li>
+          </ul>
+        </article>
+        <article class="di-service-card">
+          <div class="di-service-head">
+            <span class="di-service-tag">05</span>
+            <h3>Integraciones IA</h3>
+          </div>
+          <p class="di-service-desc">Agentes, copilots y flujos con LLMs aplicados a tu negocio. No demos — features reales en producción.</p>
+          <ul class="di-service-bullets">
+            <li><span class="di-bullet-dot"></span>OpenAI / Claude</li><li><span class="di-bullet-dot"></span>RAG sobre tus datos</li><li><span class="di-bullet-dot"></span>Agentes custom</li>
+          </ul>
+        </article>
+        <article class="di-service-card">
+          <div class="di-service-head">
+            <span class="di-service-tag">06</span>
+            <h3>Consultoría</h3>
+          </div>
+          <p class="di-service-desc">Revisamos tu stack, procesos y arquitectura. Sparring técnico para equipos que necesitan una segunda opinión honesta.</p>
+          <ul class="di-service-bullets">
+            <li><span class="di-bullet-dot"></span>Auditoría técnica</li><li><span class="di-bullet-dot"></span>Roadmap</li><li><span class="di-bullet-dot"></span>Mentoría a tu equipo</li>
+          </ul>
+        </article>
+              </div>
+            </div>
+          </section>
+
+          <section id="casos" class="di-section">
+            <div class="di-container">
+              <div class="di-section-head">
+                <span class="di-eyebrow">// Casos</span>
+                <h2>Lo que construimos para clientes reales.</h2>
+                <p class="di-section-sub">Tres ejemplos del último ciclo. Más casos detallados bajo NDA — los compartimos en el primer call si te interesan.</p>
+              </div>
+              <div class="di-cases-grid">
+        <article class="di-case-card">
+          <span class="di-service-tag">01</span>
+          <h3>Caso · Pyme logística</h3>
+          <div class="di-case-row"><span class="di-mono di-case-label">Problema</span><p>Facturación electrónica manual. 32 hs/mes en data entry y errores de tipeo.</p></div>
+          <div class="di-case-row"><span class="di-mono di-case-label">Solución</span><p>Automatización end-to-end conectando ERP + AFIP. Cero data entry manual.</p></div>
+          <div class="di-case-metric"><span class="di-gradient-text">32 hs/mes ahorradas</span></div>
+        </article>
+        <article class="di-case-card">
+          <span class="di-service-tag">02</span>
+          <h3>Caso · SaaS odontológico</h3>
+          <div class="di-case-row"><span class="di-mono di-case-label">Problema</span><p>Necesitaban un sistema multi-clínica con turnos, cobranzas y reportes en menos de 2 meses.</p></div>
+          <div class="di-case-row"><span class="di-mono di-case-label">Solución</span><p>MVP con multi-tenant, RLS por clínica, suscripciones y onboarding wizard.</p></div>
+          <div class="di-case-metric"><span class="di-gradient-text">8 semanas a producción</span></div>
+        </article>
+        <article class="di-case-card">
+          <span class="di-service-tag">03</span>
+          <h3>Caso · Reservas de barbería</h3>
+          <div class="di-case-row"><span class="di-mono di-case-label">Problema</span><p>Agenda en cuaderno + WhatsApp. Doble reserva, no-shows y plata perdida.</p></div>
+          <div class="di-case-row"><span class="di-mono di-case-label">Solución</span><p>Webapp mobile-first con magic-link auth, agenda en tiempo real y caja diaria.</p></div>
+          <div class="di-case-metric"><span class="di-gradient-text">2× reservas/semana</span></div>
+        </article>
+              </div>
+            </div>
+          </section>
+
+          <section id="proceso" class="di-section di-section-alt">
+            <div class="di-container">
+              <div class="di-section-head">
+                <span class="di-eyebrow">// Proceso</span>
+                <h2>Simple, transparente, sin sorpresas.</h2>
+                <p class="di-section-sub">Un flujo de cuatro etapas. Desde el primer call ya estás viendo avance — no al final del proyecto.</p>
+              </div>
+              <div class="di-process">
+                <div class="di-process-line"></div>
+        <div class="di-process-item">
+          <div class="di-process-marker"><span>01</span></div>
+          <div class="di-process-body">
+            <h3>Descubrimiento</h3>
+            <p>Semana 1. Nos metemos en tu negocio: problema, usuarios, restricciones. Salimos con alcance, stack y plan de entregas.</p>
+            <div class="di-process-deliv">
+              <span class="di-mono">entregable →</span> Brief técnico + propuesta
+            </div>
+          </div>
+        </div>
+        <div class="di-process-item">
+          <div class="di-process-marker"><span>02</span></div>
+          <div class="di-process-body">
+            <h3>Diseño</h3>
+            <p>Prototipos navegables y arquitectura técnica validada antes de escribir código de producción.</p>
+            <div class="di-process-deliv">
+              <span class="di-mono">entregable →</span> Figma + doc técnico
+            </div>
+          </div>
+        </div>
+        <div class="di-process-item">
+          <div class="di-process-marker"><span>03</span></div>
+          <div class="di-process-body">
+            <h3>Desarrollo</h3>
+            <p>Sprints de 1–2 semanas con demos en vivo. Vos ves el avance en tiempo real, no al final.</p>
+            <div class="di-process-deliv">
+              <span class="di-mono">entregable →</span> Staging + demos semanales
+            </div>
+          </div>
+        </div>
+        <div class="di-process-item">
+          <div class="di-process-marker"><span>04</span></div>
+          <div class="di-process-body">
+            <h3>Soporte</h3>
+            <p>Post-lanzamiento seguimos iterando: monitoreo, métricas, mejoras continuas y un humano que atiende cuando algo se rompe.</p>
+            <div class="di-process-deliv">
+              <span class="di-mono">entregable →</span> SLA + iteraciones
+            </div>
+          </div>
+        </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="stack" class="di-section">
+            <div class="di-container">
+              <div class="di-section-head">
+                <span class="di-eyebrow">// Stack</span>
+                <h2>Tecnología moderna, decisiones probadas.</h2>
+                <p class="di-section-sub">Usamos lo que funciona. Elegimos cada herramienta según el problema, no según la moda.</p>
+              </div>
+              <div class="di-stack-grid">
+        <div class="di-stack-col">
+          <div class="di-stack-label">
+            <span class="di-stack-dot"></span>
+            <span class="di-mono">Frontend</span>
+          </div>
+          <div class="di-stack-chips">
+            <span class="di-chip">TypeScript</span><span class="di-chip">React</span><span class="di-chip">Next.js</span><span class="di-chip">Tailwind</span><span class="di-chip">React Native</span>
+          </div>
+        </div>
+        <div class="di-stack-col">
+          <div class="di-stack-label">
+            <span class="di-stack-dot"></span>
+            <span class="di-mono">Backend</span>
+          </div>
+          <div class="di-stack-chips">
+            <span class="di-chip">Node.js</span><span class="di-chip">Python</span><span class="di-chip">PostgreSQL</span><span class="di-chip">Supabase</span><span class="di-chip">Redis</span>
+          </div>
+        </div>
+        <div class="di-stack-col">
+          <div class="di-stack-label">
+            <span class="di-stack-dot"></span>
+            <span class="di-mono">Infra</span>
+          </div>
+          <div class="di-stack-chips">
+            <span class="di-chip">AWS</span><span class="di-chip">Vercel</span><span class="di-chip">Docker</span><span class="di-chip">Cloudflare</span>
+          </div>
+        </div>
+        <div class="di-stack-col">
+          <div class="di-stack-label">
+            <span class="di-stack-dot"></span>
+            <span class="di-mono">IA &amp; Auto</span>
+          </div>
+          <div class="di-stack-chips">
+            <span class="di-chip">OpenAI</span><span class="di-chip">Claude</span><span class="di-chip">n8n</span><span class="di-chip">LangChain</span><span class="di-chip">Stripe</span>
+          </div>
+        </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="faq" class="di-section di-section-alt">
+            <div class="di-container">
+              <div class="di-section-head">
+                <span class="di-eyebrow">// FAQ</span>
+                <h2>Preguntas que nos hacen seguido.</h2>
+                <p class="di-section-sub">Si la tuya no está acá, escribinos. Respondemos en menos de 24 hs.</p>
+              </div>
+              <div class="di-faq">
+          <details class="di-faq-item open" open>
+            <summary class="di-faq-q">
+              <span>¿Cuánto tarda un proyecto típico?</span>
+              <span class="di-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="di-faq-a"><p>Un MVP funcional entre 4 y 8 semanas. Una landing o automatización, entre 1 y 3. Te damos un timeline realista desde el primer call — no promesas vacías.</p></div>
+          </details>
+          <details class="di-faq-item">
+            <summary class="di-faq-q">
+              <span>¿Trabajan con pymes o solo con startups?</span>
+              <span class="di-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="di-faq-a"><p>Ambos. Gran parte de nuestro trabajo es con pymes y empresas medianas que necesitan digitalizar procesos, integrar sistemas o sumar IA a lo que ya tienen.</p></div>
+          </details>
+          <details class="di-faq-item">
+            <summary class="di-faq-q">
+              <span>¿El código queda nuestro?</span>
+              <span class="di-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="di-faq-a"><p>Sí, siempre. Repositorio, documentación y credenciales son tuyos desde el día uno. Nada de vendor lock-in.</p></div>
+          </details>
+          <details class="di-faq-item">
+            <summary class="di-faq-q">
+              <span>¿Cómo cobran?</span>
+              <span class="di-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="di-faq-a"><p>Depende del proyecto: precio cerrado por alcance definido, o retainer mensual para trabajo continuo. Sin letra chica, todo firmado antes de empezar.</p></div>
+          </details>
+          <details class="di-faq-item">
+            <summary class="di-faq-q">
+              <span>¿Hacen soporte después del lanzamiento?</span>
+              <span class="di-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="di-faq-a"><p>Sí. Ofrecemos planes de mantenimiento y mejora continua. También podemos capacitar a tu equipo para que tome las riendas.</p></div>
+          </details>
+          <details class="di-faq-item">
+            <summary class="di-faq-q">
+              <span>¿Trabajan 100% remoto?</span>
+              <span class="di-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="di-faq-a"><p>Sí. Estamos en Buenos Aires y trabajamos con clientes en toda Argentina y LATAM. Para proyectos grandes podemos visitar tus oficinas.</p></div>
+          </details>
+              </div>
+            </div>
+          </section>
+
+          <section id="contacto" class="di-section di-section-contact">
+            <div class="di-container">
+              <div class="di-contact-card">
+                <div class="di-contact-left">
+                  <span class="di-eyebrow">// Contacto</span>
+                  <h2>¿Tenés una idea?<br/><span class="di-gradient-text">Hablemos.</span></h2>
+                  <p>Contanos qué necesitás. Respondemos en menos de 24 hs con una propuesta concreta y sin compromiso.</p>
+                  <div class="di-contact-meta">
+                    <div><span class="di-mono di-contact-meta-label">Ubicación</span><span>Buenos Aires · Argentina</span></div>
+                    <div><span class="di-mono di-contact-meta-label">Horario</span><span>Lun – Vie · 9:00 a 19:00 ART</span></div>
+                  </div>
+                </div>
+                <div class="di-contact-right">
+                  <a href="mailto:info@didigitalstudio.com" class="di-contact-link">
+                    <div><div class="di-contact-label">Email</div><div class="di-contact-value">info@didigitalstudio.com</div></div>
+                  </a>
+                  <a href="https://instagram.com/di.digital.studio" target="_blank" rel="noopener noreferrer" class="di-contact-link">
+                    <div><div class="di-contact-label">Instagram</div><div class="di-contact-value">@di.digital.studio</div></div>
+                  </a>
+                  <a href="https://wa.me/5493584248863" target="_blank" rel="noopener noreferrer" class="di-contact-link">
+                    <div><div class="di-contact-label">WhatsApp · Comercial (Lucas)</div><div class="di-contact-value">+54 9 358 424 8863</div></div>
+                  </a>
+                  <a href="https://wa.me/5491169459990" target="_blank" rel="noopener noreferrer" class="di-contact-link">
+                    <div><div class="di-contact-label">WhatsApp · Técnico (Agustín)</div><div class="di-contact-value">+54 9 11 6945 9990</div></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer class="di-footer">
+          <div class="di-container di-footer-inner">
+            <div class="di-footer-brand"><p>Software que impulsa negocios.</p></div>
+            <div class="di-footer-meta di-mono">
+              <a href="https://instagram.com/di.digital.studio" target="_blank" rel="noopener noreferrer">@di.digital.studio</a>
+              <span> · </span>
+              <span>© 2026 DI Digital Studio</span>
+              <span> · </span>
+              <span>Buenos Aires · Argentina</span>
+              <span> · </span>
+              <a href="/privacidad">Privacidad</a>
+              <span> · </span>
+              <a href="/terminos">Términos</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <!-- PRERENDER:END -->
+  </div>
+  <noscript>
+    <div class="di-noscript">
+      <h1>DI Digital Studio</h1>
+      <p>Software a medida, SaaS, webapps, automatizaciones e integraciones con IA para pymes y empresas medianas en Argentina y LATAM.</p>
+      <p>Esta página usa JavaScript. Para contactarnos directamente:</p>
+      <ul>
+        <li>Email: <a href="mailto:info@didigitalstudio.com">info@didigitalstudio.com</a></li>
+        <li>WhatsApp comercial: <a href="https://wa.me/5493584248863">+54 9 358 424 8863</a></li>
+        <li>WhatsApp técnico: <a href="https://wa.me/5491169459990">+54 9 11 6945 9990</a></li>
+        <li>Instagram: <a href="https://instagram.com/di.digital.studio">@di.digital.studio</a></li>
+      </ul>
+    </div>
+  </noscript>
+
+  <!-- React (production builds, self-hosted) -->
+  <script src="/assets/vendor/react.production.min.js"></script>
+  <script src="/assets/vendor/react-dom.production.min.js"></script>
+
+  <!-- Landing bundle (built from web/landing.jsx + shared/logo.jsx with esbuild) -->
+  <script src="/web/landing.bundle.js" defer></script>
+
+  <!-- Vercel Analytics (cookieless, no banner needed) -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
