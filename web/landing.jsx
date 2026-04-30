@@ -563,7 +563,14 @@ function ContactForm() {
         setStatus("manual");
       } else {
         const j = await res.json().catch(() => ({}));
-        setErrorMsg(j.error || "No pudimos enviar el mensaje. Probá los canales directos.");
+        const errorMessages = {
+          name_required: "Necesitamos tu nombre para responderte.",
+          email_invalid: "Revisá el email — parece tener algún error.",
+          message_too_short: "Contanos un poco más sobre tu proyecto (mínimo 10 caracteres).",
+          send_failed: "No pudimos enviar el mensaje. Probá los canales directos.",
+          invalid_json: "Hubo un problema con el envío. Recargá la página y volvé a intentar.",
+        };
+        setErrorMsg(errorMessages[j.error] || "No pudimos enviar el mensaje. Probá los canales directos.");
         setStatus("error");
       }
     } catch (err) {
@@ -625,7 +632,7 @@ function ContactForm() {
 
       <label className="di-form-field">
         <span>Contanos qué necesitás <em aria-hidden="true">*</em></span>
-        <textarea name="message" required minLength={20} maxLength={2000} rows={5} placeholder="Sumá contexto del problema, plazos si los tenés, y cualquier detalle útil." />
+        <textarea name="message" required minLength={10} maxLength={2000} rows={5} placeholder="Sumá contexto del problema, plazos si los tenés, y cualquier detalle útil." />
       </label>
 
       {/* Honeypot para bots — no completar */}

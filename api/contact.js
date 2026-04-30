@@ -70,7 +70,7 @@ export default async function handler(req, res) {
 
   if (name.length < 2) return res.status(400).json({ error: "name_required" });
   if (!isEmail(email)) return res.status(400).json({ error: "email_invalid" });
-  if (message.length < 20) return res.status(400).json({ error: "message_too_short" });
+  if (message.length < 10) return res.status(400).json({ error: "message_too_short" });
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
