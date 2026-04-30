@@ -138,6 +138,13 @@ ul { list-style: none; }
   transition: border-color 0.3s ease;
 }
 .di-nav.scrolled { border-bottom-color: var(--di-border); }
+/* Cuando el menú móvil está abierto el navbar se vuelve opaco para que
+   el contenido detrás no se vea a través del backdrop semitransparente. */
+.di-nav.di-nav-menu-open {
+  background: #07070b;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
 .di-nav-inner {
   max-width: 1200px; margin: 0 auto; padding: 0 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;

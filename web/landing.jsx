@@ -167,9 +167,35 @@ function Nav() {
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  // Lock de scroll robusto para iOS Safari: `overflow: hidden` no alcanza,
+  // hay que fijar el body con la scrollY guardada y restaurarla al cerrar.
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!menuOpen) return;
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+    };
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    return () => {
+      body.style.position = prev.position;
+      body.style.top = prev.top;
+      body.style.left = prev.left;
+      body.style.right = prev.right;
+      body.style.width = prev.width;
+      body.style.overflow = prev.overflow;
+      window.scrollTo(0, scrollY);
+    };
   }, [menuOpen]);
   // Si el viewport cruza a desktop con el menú abierto, lo cerramos
   useEffect(() => {
@@ -186,7 +212,7 @@ function Nav() {
   const closeMenu = () => setMenuOpen(false);
   return (
     <React.Fragment>
-      <header className={`di-nav ${scrolled ? "scrolled" : ""}`}>
+      <header className={`di-nav ${scrolled ? "scrolled" : ""} ${menuOpen ? "di-nav-menu-open" : ""}`}>
         <div className="di-nav-inner">
           <a href="#main" className="di-logo-link" onClick={closeMenu}>
             <DILogoMark size={36} animated />
