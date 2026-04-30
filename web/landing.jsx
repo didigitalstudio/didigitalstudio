@@ -570,7 +570,14 @@ function ContactForm() {
           send_failed: "No pudimos enviar el mensaje. Probá los canales directos.",
           invalid_json: "Hubo un problema con el envío. Recargá la página y volvé a intentar.",
         };
-        setErrorMsg(errorMessages[j.error] || "No pudimos enviar el mensaje. Probá los canales directos.");
+        let msg = errorMessages[j.error] || "No pudimos enviar el mensaje. Probá los canales directos.";
+        // En preview/dev, mostramos el detalle del provider para facilitar el debug
+        if (j.provider_error) {
+          const pe = j.provider_error;
+          const detail = typeof pe === "string" ? pe : (pe.message || pe.name || JSON.stringify(pe));
+          msg += ` [debug: ${detail}]`;
+        }
+        setErrorMsg(msg);
         setStatus("error");
       }
     } catch (err) {

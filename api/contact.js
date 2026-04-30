@@ -133,13 +133,21 @@ export default async function handler(req, res) {
       }),
     });
     if (!r.ok) {
-      const err = await r.text().catch(() => "");
-      console.error("[/api/contact] Resend error:", r.status, err);
-      return res.status(502).json({ error: "send_failed" });
+      let detail = null;
+      try { detail = await r.json(); } catch { detail = null; }
+      const detailText = detail ? JSON.stringify(detail) : await r.text().catch(() => "");
+      console.error("[/api/contact] Resend error:", r.status, detailText);
+      // Solo en non-production exponemos el detalle del provider para facilitar setup.
+      const isProd = process.env.VERCEL_ENV === "production";
+      return res.status(502).json({
+        error: "send_failed",
+        provider_status: r.status,
+        ...(isProd ? {} : { provider_error: detail || detailText }),
+      });
     }
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error("[/api/contact] fetch failed:", err);
+    console.error("[/api/contact] fetch failed:", err && err.message ? err.message : err);
     return res.status(502).json({ error: "send_failed" });
   }
 }
