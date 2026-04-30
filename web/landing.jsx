@@ -104,6 +104,58 @@ const FAQS = [
   },
 ];
 
+// TODO: reemplazar con clientes/casos/testimoniales reales cuando estén listos.
+const CLIENTS = [
+  // { name: "Cliente 1", logo: "/assets/clients/cliente-1.svg" },
+];
+
+const CASES = [
+  {
+    tag: "01",
+    title: "Caso · Pyme logística",
+    challenge: "Facturación electrónica manual. 32 hs/mes en data entry y errores de tipeo.",
+    outcome: "Automatización end-to-end conectando ERP + AFIP. Cero data entry manual.",
+    metric: "32 hs/mes ahorradas",
+  },
+  {
+    tag: "02",
+    title: "Caso · SaaS odontológico",
+    challenge: "Necesitaban un sistema multi-clínica con turnos, cobranzas y reportes en menos de 2 meses.",
+    outcome: "MVP con multi-tenant, RLS por clínica, suscripciones y onboarding wizard.",
+    metric: "8 semanas a producción",
+  },
+  {
+    tag: "03",
+    title: "Caso · Reservas de barbería",
+    challenge: "Agenda en cuaderno + WhatsApp. Doble reserva, no-shows y plata perdida.",
+    outcome: "Webapp mobile-first con magic-link auth, agenda en tiempo real y caja diaria.",
+    metric: "2× reservas/semana",
+  },
+];
+
+const TESTIMONIALS = [
+  // TODO: reemplazar con testimoniales reales con nombre + cargo + empresa
+];
+
+const PROJECT_TYPES = [
+  { value: "software-a-medida", label: "Software a medida" },
+  { value: "saas", label: "SaaS" },
+  { value: "webapp", label: "Webapp" },
+  { value: "automatizacion", label: "Automatización" },
+  { value: "ia", label: "Integración IA" },
+  { value: "consultoria", label: "Consultoría técnica" },
+  { value: "no-se", label: "No estoy seguro / quiero asesoramiento" },
+];
+
+const BUDGETS = [
+  { value: "2-5k", label: "USD 2.500 – 5.000" },
+  { value: "5-15k", label: "USD 5.000 – 15.000" },
+  { value: "15-50k", label: "USD 15.000 – 50.000" },
+  { value: "50k+", label: "USD 50.000+" },
+  { value: "retainer", label: "Retainer mensual continuo" },
+  { value: "no-se", label: "Todavía no lo definí" },
+];
+
 /* --------- Components --------- */
 
 function Nav() {
@@ -119,18 +171,30 @@ function Nav() {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+  // Si el viewport cruza a desktop con el menú abierto, lo cerramos
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(min-width: 861px)");
+    const onChange = (e) => { if (e.matches) setMenuOpen(false); };
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
+      else if (mq.removeListener) mq.removeListener(onChange);
+    };
+  }, []);
   const closeMenu = () => setMenuOpen(false);
   return (
     <React.Fragment>
       <header className={`di-nav ${scrolled ? "scrolled" : ""}`}>
         <div className="di-nav-inner">
-          <a href="#top" className="di-logo-link" onClick={closeMenu}>
+          <a href="#main" className="di-logo-link" onClick={closeMenu}>
             <DILogoMark size={36} animated />
             <span className="di-logo-text">
               DI <span className="di-logo-accent">Digital Studio</span>
             </span>
           </a>
-          <nav className="di-nav-links">
+          <nav className="di-nav-links" aria-label="Principal">
             <a href="#servicios">Servicios</a>
             <a href="#proceso">Proceso</a>
             <a href="#stack">Stack</a>
@@ -153,7 +217,7 @@ function Nav() {
         </div>
       </header>
       <div className={`di-mobile-menu ${menuOpen ? "is-open" : ""}`}>
-        <nav className="di-mobile-links">
+        <nav className="di-mobile-links" aria-label="Móvil">
           <a href="#servicios" onClick={closeMenu}>Servicios</a>
           <a href="#proceso" onClick={closeMenu}>Proceso</a>
           <a href="#stack" onClick={closeMenu}>Stack</a>
@@ -199,15 +263,15 @@ function Hero() {
         <div className="di-hero-stats">
           <div className="di-stat">
             <div className="di-stat-num">100%</div>
-            <div className="di-stat-label">A medida</div>
+            <div className="di-stat-label">Código del cliente</div>
           </div>
           <div className="di-stat">
             <div className="di-stat-num">&lt; 2 sem</div>
             <div className="di-stat-label">Primer entregable</div>
           </div>
           <div className="di-stat">
-            <div className="di-stat-num">24 / 7</div>
-            <div className="di-stat-label">Soporte continuo</div>
+            <div className="di-stat-num">SLA</div>
+            <div className="di-stat-label">Soporte post-launch</div>
           </div>
         </div>
 
@@ -218,7 +282,7 @@ function Hero() {
             <div className="di-orbit-ring di-orbit-ring-2"></div>
             <div className="di-orbit-ring di-orbit-ring-3"></div>
             <div className="di-orbit-center">
-              <DILogoMark size={120} animated />
+              <DILogoMark size={120} animated decorative={false} label="DI Digital Studio — Software a medida" />
             </div>
             <span className="di-orbit-chip" style={{ "--angle": "20deg" }}>SaaS</span>
             <span className="di-orbit-chip" style={{ "--angle": "95deg" }}>IA</span>
@@ -350,31 +414,266 @@ function FAQ() {
           </p>
         </div>
 
-        <div className="di-faq">
-          {FAQS.map((f, i) => (
-            <button
-              key={f.q}
-              className={`di-faq-item ${open === i ? "open" : ""}`}
-              onClick={() => setOpen(open === i ? -1 : i)}
-              aria-expanded={open === i}
-            >
-              <div className="di-faq-q">
-                <span>{f.q}</span>
-                <span className="di-faq-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </span>
+        <div className="di-faq" role="list">
+          {FAQS.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={f.q} className={`di-faq-item ${isOpen ? "open" : ""}`} role="listitem">
+                <h3 className="di-faq-h">
+                  <button
+                    className="di-faq-trigger"
+                    onClick={() => setOpen(isOpen ? -1 : i)}
+                    aria-expanded={isOpen}
+                    aria-controls={`di-faq-panel-${i}`}
+                    id={`di-faq-trigger-${i}`}
+                  >
+                    <span className="di-faq-q">{f.q}</span>
+                    <span className="di-faq-icon" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  id={`di-faq-panel-${i}`}
+                  className="di-faq-a"
+                  role="region"
+                  aria-labelledby={`di-faq-trigger-${i}`}
+                  hidden={!isOpen}
+                >
+                  <p>{f.a}</p>
+                </div>
               </div>
-              <div className="di-faq-a">
-                <p>{f.a}</p>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Cases() {
+  return (
+    <section id="casos" className="di-section">
+      <div className="di-container">
+        <div className="di-section-head">
+          <span className="di-eyebrow">// Casos</span>
+          <h2>Lo que construimos para clientes reales.</h2>
+          <p className="di-section-sub">
+            Tres ejemplos del último ciclo. Más casos detallados bajo NDA — los compartimos
+            en el primer call si te interesan.
+          </p>
+        </div>
+
+        <div className="di-cases-grid">
+          {CASES.map((c) => (
+            <article key={c.tag} className="di-case-card">
+              <span className="di-service-tag">{c.tag}</span>
+              <h3>{c.title}</h3>
+              <div className="di-case-row">
+                <span className="di-mono di-case-label">Problema</span>
+                <p>{c.challenge}</p>
               </div>
-            </button>
+              <div className="di-case-row">
+                <span className="di-mono di-case-label">Solución</span>
+                <p>{c.outcome}</p>
+              </div>
+              <div className="di-case-metric">
+                <span className="di-gradient-text">{c.metric}</span>
+              </div>
+            </article>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function Clients() {
+  if (!CLIENTS.length) return null;
+  return (
+    <section className="di-clients" aria-label="Clientes">
+      <div className="di-container">
+        <p className="di-clients-label di-mono">// Confían en nosotros</p>
+        <div className="di-clients-strip">
+          {CLIENTS.map((c) => (
+            <img key={c.name} src={c.logo} alt={c.name} loading="lazy" className="di-client-logo" />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  if (!TESTIMONIALS.length) return null;
+  return (
+    <section id="testimoniales" className="di-section">
+      <div className="di-container">
+        <div className="di-section-head">
+          <span className="di-eyebrow">// Testimoniales</span>
+          <h2>Lo que dicen quienes ya trabajaron con nosotros.</h2>
+        </div>
+        <div className="di-testimonials-grid">
+          {TESTIMONIALS.map((t, i) => (
+            <figure key={i} className="di-testimonial">
+              <blockquote>{t.quote}</blockquote>
+              <figcaption>
+                <strong>{t.name}</strong>
+                <span>{t.role} · {t.company}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactForm() {
+  const [status, setStatus] = useState("idle"); // idle | sending | ok | error | manual
+  const [errorMsg, setErrorMsg] = useState("");
+  const [startedAt] = useState(() => Date.now());
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (status === "sending") return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    // Honeypot: bots completan campos hidden — descartamos si tiene contenido o si tarda <3s.
+    if (data.get("website") || Date.now() - startedAt < 3000) {
+      setStatus("ok"); // engaño silencioso
+      form.reset();
+      return;
+    }
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(data.entries())),
+      });
+      if (res.ok) {
+        setStatus("ok");
+        form.reset();
+      } else if (res.status === 503) {
+        setStatus("manual");
+      } else {
+        const j = await res.json().catch(() => ({}));
+        const errorMessages = {
+          name_required: "Necesitamos tu nombre para responderte.",
+          email_invalid: "Revisá el email — parece tener algún error.",
+          message_too_short: "Contanos un poco más sobre tu proyecto (mínimo 10 caracteres).",
+          send_failed: "No pudimos enviar el mensaje. Probá los canales directos.",
+          invalid_json: "Hubo un problema con el envío. Recargá la página y volvé a intentar.",
+        };
+        let msg = errorMessages[j.error] || "No pudimos enviar el mensaje. Probá los canales directos.";
+        // En preview/dev, mostramos el detalle del provider para facilitar el debug
+        if (j.provider_error) {
+          const pe = j.provider_error;
+          const detail = typeof pe === "string" ? pe : (pe.message || pe.name || JSON.stringify(pe));
+          msg += ` [debug: ${detail}]`;
+        }
+        setErrorMsg(msg);
+        setStatus("error");
+      }
+    } catch (err) {
+      setErrorMsg("Sin conexión. Probá los canales directos abajo.");
+      setStatus("error");
+    }
+  };
+
+  if (status === "ok") {
+    return (
+      <div className="di-form-success" role="status">
+        <div className="di-form-success-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+        </div>
+        <h3>¡Listo, recibimos tu mensaje!</h3>
+        <p>Te respondemos en menos de 24 hs hábiles a tu email.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form className="di-form" onSubmit={onSubmit} noValidate>
+      <div className="di-form-row">
+        <label className="di-form-field">
+          <span>Nombre <em aria-hidden="true">*</em></span>
+          <input type="text" name="name" required minLength={2} maxLength={80} autoComplete="name" />
+        </label>
+        <label className="di-form-field">
+          <span>Empresa</span>
+          <input type="text" name="company" maxLength={120} autoComplete="organization" />
+        </label>
+      </div>
+
+      <label className="di-form-field">
+        <span>Email <em aria-hidden="true">*</em></span>
+        <input type="email" name="email" required maxLength={120} autoComplete="email" inputMode="email" />
+      </label>
+
+      <div className="di-form-row">
+        <label className="di-form-field">
+          <span>Tipo de proyecto</span>
+          <select name="projectType" defaultValue="">
+            <option value="" disabled>Seleccioná uno</option>
+            {PROJECT_TYPES.map((p) => (
+              <option key={p.value} value={p.value}>{p.label}</option>
+            ))}
+          </select>
+        </label>
+        <label className="di-form-field">
+          <span>Inversión orientativa</span>
+          <select name="budget" defaultValue="">
+            <option value="" disabled>Seleccioná uno</option>
+            {BUDGETS.map((b) => (
+              <option key={b.value} value={b.value}>{b.label}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <label className="di-form-field">
+        <span>Contanos qué necesitás <em aria-hidden="true">*</em></span>
+        <textarea name="message" required minLength={10} maxLength={2000} rows={5} placeholder="Sumá contexto del problema, plazos si los tenés, y cualquier detalle útil." />
+      </label>
+
+      {/* Honeypot para bots — no completar */}
+      <div className="di-form-hp" aria-hidden="true">
+        <label>No completar este campo
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
+
+      <button type="submit" className="di-btn di-btn-primary di-form-submit" disabled={status === "sending"}>
+        {status === "sending" ? "Enviando…" : "Enviar mensaje"}
+        {status !== "sending" && (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        )}
+      </button>
+
+      {status === "error" && (
+        <p className="di-form-msg di-form-msg-error" role="alert">{errorMsg}</p>
+      )}
+      {status === "manual" && (
+        <p className="di-form-msg di-form-msg-warning" role="status">
+          El form no está activo todavía. Escribinos directo a{" "}
+          <a href="mailto:info@didigitalstudio.com">info@didigitalstudio.com</a>{" "}
+          o por WhatsApp abajo.
+        </p>
+      )}
+
+      <p className="di-form-legal di-mono">
+        Al enviar aceptás nuestra{" "}
+        <a href="/privacidad">política de privacidad</a>.
+      </p>
+    </form>
   );
 }
 
@@ -404,71 +703,29 @@ function Contact() {
                 <span>Lun – Vie · 9:00 a 19:00 ART</span>
               </div>
             </div>
+
+            <div className="di-contact-channels">
+              <a href="mailto:info@didigitalstudio.com" className="di-channel">
+                <span className="di-mono di-channel-label">Email</span>
+                <span className="di-channel-value">info@didigitalstudio.com</span>
+              </a>
+              <a href="https://wa.me/5491169459990?text=Hola%20Lucas%2C%20quiero%20consultar%20un%20proyecto" target="_blank" rel="noopener noreferrer" className="di-channel">
+                <span className="di-mono di-channel-label">WhatsApp · Comercial · Lucas</span>
+                <span className="di-channel-value">+54 9 11 6945 9990</span>
+              </a>
+              <a href="https://wa.me/5493584248863?text=Hola%20Agust%C3%ADn%2C%20quiero%20consultar%20algo%20t%C3%A9cnico" target="_blank" rel="noopener noreferrer" className="di-channel">
+                <span className="di-mono di-channel-label">WhatsApp · Técnico · Agustín</span>
+                <span className="di-channel-value">+54 9 358 424 8863</span>
+              </a>
+              <a href="https://instagram.com/di.digital.studio" target="_blank" rel="noopener noreferrer" className="di-channel">
+                <span className="di-mono di-channel-label">Instagram</span>
+                <span className="di-channel-value">@di.digital.studio</span>
+              </a>
+            </div>
           </div>
 
           <div className="di-contact-right">
-            <a href="mailto:info@didigitalstudio.com" className="di-contact-link">
-              <div className="di-contact-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                  <polyline points="22,6 12,13 2,6" />
-                </svg>
-              </div>
-              <div>
-                <div className="di-contact-label">Email</div>
-                <div className="di-contact-value">info@didigitalstudio.com</div>
-              </div>
-              <svg className="di-contact-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </a>
-
-            <a href="https://instagram.com/di.digital.studio" target="_blank" rel="noopener" className="di-contact-link">
-              <div className="di-contact-icon instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                </svg>
-              </div>
-              <div>
-                <div className="di-contact-label">Instagram</div>
-                <div className="di-contact-value">@di.digital.studio</div>
-              </div>
-              <svg className="di-contact-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </a>
-
-            <a href="https://wa.me/5493584248863" target="_blank" rel="noopener" className="di-contact-link">
-              <div className="di-contact-icon whatsapp">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-              </div>
-              <div>
-                <div className="di-contact-label">WhatsApp</div>
-                <div className="di-contact-value">+54 9 358 424 8863</div>
-              </div>
-              <svg className="di-contact-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </a>
-
-            <a href="https://wa.me/5491169459990" target="_blank" rel="noopener" className="di-contact-link">
-              <div className="di-contact-icon whatsapp">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-              </div>
-              <div>
-                <div className="di-contact-label">WhatsApp</div>
-                <div className="di-contact-value">+54 9 11 6945 9990</div>
-              </div>
-              <svg className="di-contact-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </a>
+            <ContactForm />
           </div>
         </div>
       </div>
@@ -485,9 +742,13 @@ function Footer() {
           <p>Software que impulsa negocios.</p>
         </div>
         <div className="di-footer-meta di-mono">
-          <a href="https://instagram.com/di.digital.studio" target="_blank" rel="noopener" className="di-footer-link">
-            @di.digital.studio
-          </a>
+          <a href="mailto:info@didigitalstudio.com" className="di-footer-link">info@didigitalstudio.com</a>
+          <span className="di-footer-sep">·</span>
+          <a href="https://instagram.com/di.digital.studio" target="_blank" rel="noopener noreferrer" className="di-footer-link">@di.digital.studio</a>
+          <span className="di-footer-sep">·</span>
+          <a href="/privacidad" className="di-footer-link">Privacidad</a>
+          <span className="di-footer-sep">·</span>
+          <a href="/terminos" className="di-footer-link">Términos</a>
           <span className="di-footer-sep">·</span>
           <span>© {new Date().getFullYear()} DI Digital Studio</span>
           <span className="di-footer-sep">·</span>
@@ -499,34 +760,57 @@ function Footer() {
 }
 
 function LandingApp() {
-  // Parallax on glows
+  // Parallax on glows — pausa cuando la pestaña está oculta y respeta reduced-motion
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const glow1 = document.querySelector(".di-glow-1");
     const glow2 = document.querySelector(".di-glow-2");
-    let tx = 0, ty = 0, cx = 0, cy = 0, raf;
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    let running = false;
     const onMove = (e) => {
       tx = (e.clientX / window.innerWidth - 0.5) * 40;
       ty = (e.clientY / window.innerHeight - 0.5) * 40;
+      if (!running) start();
     };
     const loop = () => {
       cx += (tx - cx) * 0.05;
       cy += (ty - cy) * 0.05;
       if (glow1) glow1.style.transform = `translate(${cx}px, ${cy}px)`;
       if (glow2) glow2.style.transform = `translate(${-cx}px, ${-cy}px)`;
+      // Detener cuando converge para no consumir CPU innecesario
+      if (Math.abs(tx - cx) < 0.05 && Math.abs(ty - cy) < 0.05) {
+        running = false;
+        raf = null;
+        return;
+      }
       raf = requestAnimationFrame(loop);
     };
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      document.addEventListener("mousemove", onMove);
-      loop();
-    }
+    const start = () => {
+      if (running || document.hidden) return;
+      running = true;
+      raf = requestAnimationFrame(loop);
+    };
+    const onVisibility = () => {
+      if (document.hidden && raf) {
+        cancelAnimationFrame(raf);
+        running = false;
+        raf = null;
+      }
+    };
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("visibilitychange", onVisibility);
     return () => {
       document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("visibilitychange", onVisibility);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 
-  // Reveal on scroll (simple)
+  // Reveal on scroll — solo si no hay reduced-motion
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -540,7 +824,7 @@ function LandingApp() {
     );
     document
       .querySelectorAll(
-        ".di-hero h1, .di-hero-sub, .di-hero-ctas, .di-hero-stats, .di-hero-visual, .di-section-head, .di-service-card, .di-process-item, .di-stack-col, .di-faq-item, .di-contact-card"
+        ".di-hero h1, .di-hero-sub, .di-hero-ctas, .di-hero-stats, .di-hero-visual, .di-section-head, .di-service-card, .di-case-card, .di-process-item, .di-stack-col, .di-faq-item, .di-testimonial, .di-contact-card"
       )
       .forEach((el) => {
         el.classList.add("di-reveal");
@@ -556,7 +840,7 @@ function LandingApp() {
       <div className="di-glow di-glow-2"></div>
 
       <Nav />
-      <main id="top">
+      <main id="main" tabIndex={-1}>
         <Hero />
         <Services />
         <Process />

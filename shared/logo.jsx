@@ -2,8 +2,10 @@
 // DI Digital Studio — Logo components (isotipo A1 + logotipo)
 // Isotipo: D outline + i minúscula donde el orb brillante es el punto (tittle) de la i.
 
-function DILogoMark({ size = 32, animated = false, className = "", style = {} }) {
-  const id = React.useId ? React.useId().replace(/:/g, "") : Math.random().toString(36).slice(2);
+function DILogoMark({ size = 32, animated = false, className = "", style = {}, decorative = true, label = "DI Digital Studio" }) {
+  // useId está disponible en React 18+; este componente se monta dentro de React.
+  const rawId = React.useId();
+  const id = rawId.replace(/:/g, "");
   return (
     <svg
       width={size}
@@ -13,8 +15,12 @@ function DILogoMark({ size = 32, animated = false, className = "", style = {} })
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={style}
-      aria-hidden="true"
+      role={decorative ? "presentation" : "img"}
+      aria-hidden={decorative ? "true" : undefined}
+      aria-label={!decorative ? label : undefined}
     >
+      {!decorative && <title>{label}</title>}
+      {!decorative && <desc>Logo del estudio de software DI Digital Studio</desc>}
       {/* soft inner glow */}
       <circle cx="100" cy="100" r="64" fill={`url(#di-glow-${id})`} />
       {/* D — outlined */}

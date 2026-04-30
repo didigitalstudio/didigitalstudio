@@ -1,0 +1,12 @@
+# Archivos internos que no deben servirse en producción
+design-canvas.jsx
+DI Digital Studio.html
+logo-variants.html
+mockups/
+uploads/
+instagram/
+.claude/
+.git/
+.gitignore
+.vercelignore
+README.md

@@ -1,0 +1,70 @@
+# DI Digital Studio
+
+> Estudio de desarrollo de software basado en Buenos Aires, Argentina. Construimos software a medida, SaaS multi-tenant, webapps, automatizaciones e integraciones con IA para pymes y empresas medianas en Argentina y LATAM. Del prototipo a producción en semanas, con código que queda 100% del cliente.
+
+## Sobre nosotros
+
+DI Digital Studio es un estudio chico de software con base en Buenos Aires que trabaja con pymes y empresas medianas argentinas y de LATAM. Nuestro foco son tres categorías que pocos estudios cubren bien al mismo tiempo: software a medida con calidad de producto (no scripts ni "consultoría"), SaaS productivos con multi-tenancy y suscripciones reales, y automatizaciones / integraciones con IA aplicadas a problemas concretos del negocio.
+
+Trabajamos 100% remoto. Identidad legal en Buenos Aires, Argentina. Comunicación en español rioplatense.
+
+## Servicios
+
+- **Software a medida**: backend + frontend con TypeScript/Node.js/Python, arquitectura escalable (PostgreSQL/Supabase/Redis), tests y CI/CD. Sin templates. Código documentado y entregado al cliente.
+- **SaaS**: producto listo para facturar — multi-tenant, suscripciones (Stripe / MercadoPago), onboarding y métricas. Del MVP al release entre 4 y 8 semanas.
+- **Webapps**: aplicaciones React / Next.js modernas, real-time, mobile-first. Paneles internos, portales de cliente, dashboards operativos.
+- **Automatizaciones**: cortamos tareas repetitivas. n8n / Zapier custom, scrapers, bots y webhooks que conectan los sistemas que ya usás.
+- **Integraciones IA**: agentes, copilots y flujos con LLMs (OpenAI, Claude) aplicados a tu negocio. RAG sobre tus datos. No demos — features reales en producción.
+- **Consultoría técnica**: auditoría de stack, roadmap, mentoría a equipos. Sparring técnico para equipos que necesitan una segunda opinión honesta.
+
+## Stack
+
+- **Frontend**: TypeScript, React, Next.js, Tailwind CSS, React Native
+- **Backend**: Node.js, Python, PostgreSQL, Supabase, Redis
+- **Infra**: AWS, Vercel, Docker, Cloudflare
+- **IA & Automatización**: OpenAI, Claude, n8n, LangChain, Stripe, MercadoPago
+
+## Proceso
+
+1. **Descubrimiento (semana 1)**: nos metemos en tu negocio — problema, usuarios, restricciones. Salimos con alcance, stack y plan de entregas. Entregable: brief técnico + propuesta.
+2. **Diseño**: prototipos navegables y arquitectura técnica validada antes de escribir código de producción. Entregable: Figma + doc técnico.
+3. **Desarrollo**: sprints de 1–2 semanas con demos en vivo. Avance visible, no opaco. Entregable: staging + demos semanales.
+4. **Soporte**: post-lanzamiento iteramos — monitoreo, métricas, mejoras continuas. SLA con humano que atiende cuando algo se rompe.
+
+## Cómo cobramos
+
+- **Precio cerrado** por alcance definido (proyectos one-shot tipo MVP o landing).
+- **Retainer mensual** para trabajo continuo o equipo extendido.
+- Sin letra chica. Todo firmado antes de empezar. Cotización tras descubrimiento de 1 semana.
+
+## Tiempos típicos
+
+- Landing o automatización: 1 a 3 semanas.
+- MVP funcional o SaaS inicial: 4 a 8 semanas.
+- Plataforma completa o multi-módulo: 3 a 6 meses.
+
+## Garantías
+
+- El código queda 100% del cliente. Repositorio, documentación y credenciales son tuyos desde el día uno. Nada de vendor lock-in.
+- Sin templates ni features genéricas que no usás.
+- Demos semanales en vivo desde la semana 2 — el cliente ve el avance, no espera al final.
+
+## Contacto
+
+- **Email**: info@didigitalstudio.com
+- **Web**: https://www.didigitalstudio.com
+- **Instagram**: https://instagram.com/di.digital.studio (@di.digital.studio)
+- **WhatsApp** (comercial): +54 9 11 6945 9990
+- **WhatsApp** (técnico): +54 9 358 424 8863
+- **Ubicación**: Buenos Aires, Argentina
+- **Horario**: Lunes a Viernes, 9:00 a 19:00 ART (UTC-3)
+- **Cobertura**: Argentina y LATAM (100% remoto)
+
+## Preguntas frecuentes
+
+- **¿Cuánto tarda un proyecto típico?** Un MVP funcional entre 4 y 8 semanas. Una landing o automatización, entre 1 y 3 semanas. Damos timeline realista desde el primer call.
+- **¿Trabajan con pymes o solo con startups?** Ambos. Gran parte del trabajo es con pymes y empresas medianas que necesitan digitalizar procesos, integrar sistemas o sumar IA a lo que ya tienen.
+- **¿El código queda nuestro?** Sí, siempre. Repositorio, documentación y credenciales son del cliente desde el día uno.
+- **¿Cómo cobran?** Precio cerrado por alcance definido o retainer mensual para trabajo continuo. Todo firmado antes de empezar.
+- **¿Hacen soporte después del lanzamiento?** Sí. Planes de mantenimiento y mejora continua. También capacitamos al equipo del cliente para que tome las riendas.
+- **¿Trabajan 100% remoto?** Sí. Estamos en Buenos Aires y trabajamos con clientes en toda Argentina y LATAM. Para proyectos grandes podemos visitar oficinas.

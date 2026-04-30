@@ -2,8 +2,13 @@
    DI Digital Studio — Landing styles
    ============================================ */
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, h4, h5, p, ul, figure, blockquote, dl, dd { margin: 0; }
+ul { padding: 0; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;       /* corta cualquier overflow horizontal en root */
+}
 body {
   font-family: var(--di-sans);
   background: var(--di-bg);
@@ -11,13 +16,67 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100vh;
+  width: 100%;
 }
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
-button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; padding: 0; }
 ul { list-style: none; }
+
+/* Focus states — visible para teclado, sutiles para mouse */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--di-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.di-btn:focus-visible {
+  outline-offset: 4px;
+}
+
+/* Skip link — solo visible al tabular */
+.di-skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  z-index: 9999;
+  padding: 12px 20px;
+  background: var(--di-violet);
+  color: var(--di-text);
+  font-weight: 600;
+  border-radius: var(--di-r-sm);
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.di-skip-link:focus {
+  top: 12px;
+  outline: 2px solid var(--di-cyan);
+  outline-offset: 3px;
+}
+
+/* Noscript fallback */
+.di-noscript {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  font-family: var(--di-sans);
+  color: var(--di-text);
+}
+.di-noscript h1 {
+  font-size: 32px;
+  margin-bottom: 16px;
+  background: var(--di-grad-tri);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.di-noscript p { color: var(--di-text-dim); margin-bottom: 12px; }
+.di-noscript ul { padding-left: 20px; list-style: disc; }
+.di-noscript li { margin: 8px 0; }
+.di-noscript a { color: var(--di-cyan-soft); text-decoration: underline; }
 
 .di-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -490,7 +549,11 @@ ul { list-style: none; }
 .di-footer-brand p { font-size: 13px; color: var(--di-text-muted); }
 .di-footer-link { color: var(--di-text-dim); transition: color 0.2s ease; }
 .di-footer-link:hover { color: var(--di-text); }
-.di-footer-meta { display: flex; gap: 10px; font-size: 13px; color: var(--di-text-muted); }
+.di-footer-meta {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 6px 10px;
+  font-size: 13px; color: var(--di-text-muted);
+}
 .di-footer-sep { opacity: 0.4; }
 
 /* Reveal */
@@ -512,7 +575,11 @@ ul { list-style: none; }
   .di-orbit-ring-1 { width: 150px; height: 150px; }
   .di-orbit-chip { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(150px) rotate(calc(-1 * var(--angle))); font-size: 11px; padding: 6px 10px; }
   .di-contact-card { grid-template-columns: 1fr; padding: 36px 28px; gap: 32px; }
-  .di-footer-inner { flex-direction: column; text-align: center; }
+  .di-footer-inner { flex-direction: column; text-align: center; gap: 16px; }
+  .di-footer-meta { justify-content: center; row-gap: 6px; }
+  .di-footer-meta .di-footer-sep { display: none; }
+  .di-footer-meta > span,
+  .di-footer-meta > a { padding: 2px 4px; }
   .di-process-line { display: none; }
 }
 @media (max-width: 640px) {
@@ -527,8 +594,299 @@ ul { list-style: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
+    animation: none !important;
     transition-duration: 0.01ms !important;
   }
   .di-reveal { opacity: 1; transform: none; }
+  .di-glow { animation: none !important; }
 }
+
+/* ============================================
+   Tap targets — min 44x44 en pointer:coarse
+   ============================================ */
+@media (pointer: coarse) {
+  .di-nav-links a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 8px; }
+  .di-mobile-links a { min-height: 48px; }
+  .di-faq-trigger { min-height: 56px; }
+}
+
+/* Hover styles solo en dispositivos con hover real */
+@media (hover: none) {
+  .di-service-card:hover,
+  .di-case-card:hover,
+  .di-faq-item:hover,
+  .di-contact-link:hover { transform: none; }
+}
+
+/* ============================================
+   Pre-render styles (visibles antes que React monte)
+   ============================================ */
+.di-prerender { opacity: 1; }
+.di-prerender .di-nav-static {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px; max-width: 1200px; margin: 0 auto;
+}
+.di-prerender .di-nav-static .di-logo-text {
+  font-weight: 700; letter-spacing: -0.02em; font-size: 16px;
+}
+.di-prerender .di-logo-accent { font-weight: 400; color: var(--di-text-dim); }
+
+/* ============================================
+   Clientes / Logos strip
+   ============================================ */
+.di-clients { padding: 48px 0; border-top: 1px solid var(--di-border); border-bottom: 1px solid var(--di-border); }
+.di-clients-label {
+  text-align: center; color: var(--di-text-muted);
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.di-clients-strip {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 48px; opacity: 0.7;
+}
+.di-client-logo { height: 32px; width: auto; filter: grayscale(1) brightness(1.2); }
+
+/* ============================================
+   Casos
+   ============================================ */
+.di-cases-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.di-case-card {
+  background: var(--di-surface);
+  border: 1px solid var(--di-border);
+  border-radius: var(--di-r-lg);
+  padding: 28px;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.di-case-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--di-border-strong);
+  background: var(--di-surface-hover);
+}
+.di-case-card .di-service-tag {
+  display: inline-block;
+  font-family: var(--di-mono); font-size: 12px;
+  color: var(--di-cyan-soft); letter-spacing: 0.08em;
+  padding: 4px 10px; border: 1px solid var(--di-border);
+  border-radius: 100px; align-self: flex-start;
+}
+.di-case-card h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.di-case-row p { font-size: 14px; color: var(--di-text-dim); line-height: 1.55; margin-top: 4px; }
+.di-case-label {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--di-text-muted);
+}
+.di-case-metric {
+  margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--di-border);
+  font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+}
+
+@media (max-width: 900px) { .di-cases-grid { grid-template-columns: 1fr; } }
+
+/* ============================================
+   Testimoniales
+   ============================================ */
+.di-testimonials-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.di-testimonial {
+  background: var(--di-surface);
+  border: 1px solid var(--di-border);
+  border-radius: var(--di-r-md);
+  padding: 24px;
+}
+.di-testimonial blockquote {
+  font-size: 16px; color: var(--di-text-dim); line-height: 1.55;
+  font-style: italic; margin-bottom: 16px;
+}
+.di-testimonial blockquote::before { content: "\201C"; }
+.di-testimonial blockquote::after { content: "\201D"; }
+.di-testimonial figcaption { display: flex; flex-direction: column; gap: 2px; }
+.di-testimonial figcaption strong { font-weight: 600; }
+.di-testimonial figcaption span { font-size: 13px; color: var(--di-text-muted); }
+
+/* ============================================
+   Channels — bloque de canales en Contact
+   ============================================ */
+.di-contact-channels {
+  margin-top: 32px;
+  display: grid; gap: 12px;
+}
+.di-channel {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--di-border);
+  border-radius: var(--di-r-sm);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.di-channel:hover { border-color: var(--di-border-strong); background: rgba(255,255,255,0.05); }
+.di-channel-label { font-size: 11px; letter-spacing: 0.1em; color: var(--di-text-muted); text-transform: uppercase; }
+.di-channel-value { font-size: 15px; color: var(--di-text); }
+
+/* ============================================
+   Form — qualification
+   ============================================ */
+.di-form { display: flex; flex-direction: column; gap: 16px; }
+.di-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.di-form-field { display: flex; flex-direction: column; gap: 6px; }
+.di-form-field > span {
+  font-size: 13px; color: var(--di-text-dim);
+  font-weight: 500;
+}
+.di-form-field > span em {
+  color: var(--di-accent); font-style: normal;
+}
+.di-form-field input,
+.di-form-field select,
+.di-form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--di-border);
+  border-radius: var(--di-r-sm);
+  color: var(--di-text);
+  font: inherit;
+  font-size: 14.5px;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.di-form-field textarea { resize: vertical; min-height: 120px; }
+.di-form-field input:focus,
+.di-form-field select:focus,
+.di-form-field textarea:focus {
+  outline: none;
+  border-color: var(--di-cyan);
+  background: rgba(34,211,238,0.04);
+}
+.di-form-field select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--di-text-muted) 50%),
+                    linear-gradient(135deg, var(--di-text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+.di-form-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.di-form-submit { align-self: flex-start; margin-top: 4px; }
+.di-form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.di-form-msg {
+  padding: 12px 16px;
+  border-radius: var(--di-r-sm);
+  font-size: 14px;
+}
+.di-form-msg-error {
+  background: rgba(236,72,153,0.08);
+  border: 1px solid rgba(236,72,153,0.3);
+  color: #fbbfd5;
+}
+.di-form-msg-warning {
+  background: rgba(251,191,36,0.08);
+  border: 1px solid rgba(251,191,36,0.3);
+  color: #fbd58e;
+}
+.di-form-msg-warning a { color: var(--di-cyan-soft); text-decoration: underline; }
+.di-form-legal { font-size: 12px; color: var(--di-text-muted); }
+.di-form-legal a { color: var(--di-cyan-soft); text-decoration: underline; }
+
+.di-form-success {
+  text-align: center;
+  padding: 40px 20px;
+}
+.di-form-success-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(34,211,238,0.1);
+  color: var(--di-cyan);
+  margin-bottom: 20px;
+}
+.di-form-success h3 { font-size: 22px; margin-bottom: 8px; font-weight: 600; }
+.di-form-success p { color: var(--di-text-dim); }
+
+@media (max-width: 640px) {
+  .di-form-row { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   FAQ — refactor a button + region
+   ============================================ */
+.di-faq-h { margin: 0; }
+.di-faq-trigger {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: transparent;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--di-text);
+  cursor: pointer;
+}
+.di-faq-trigger .di-faq-q { font-weight: 500; }
+.di-faq-item .di-faq-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  color: var(--di-text-dim);
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+}
+.di-faq-item.open .di-faq-icon {
+  transform: rotate(45deg);
+  background: rgba(34,211,238,0.15);
+  color: var(--di-cyan);
+}
+.di-faq-item .di-faq-a {
+  padding: 0 24px 22px;
+  color: var(--di-text-dim);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   Páginas legales
+   ============================================ */
+.di-legal {
+  padding: 80px 0 120px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.di-legal .di-legal-back { margin-bottom: 32px; }
+.di-legal .di-legal-back a { color: var(--di-cyan-soft); text-decoration: none; }
+.di-legal .di-legal-back a:hover { text-decoration: underline; }
+.di-legal h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.di-legal .di-legal-meta {
+  font-size: 14px;
+  color: var(--di-text-muted);
+  margin-bottom: 40px;
+}
+.di-legal h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 36px;
+  margin-bottom: 12px;
+}
+.di-legal p, .di-legal ul, .di-legal ol {
+  color: var(--di-text-dim);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.di-legal ul, .di-legal ol { padding-left: 22px; list-style: disc; }
+.di-legal ol { list-style: decimal; }
+.di-legal li { margin-bottom: 6px; }
+.di-legal a { color: var(--di-cyan-soft); text-decoration: underline; }
+.di-legal strong { color: var(--di-text); }
